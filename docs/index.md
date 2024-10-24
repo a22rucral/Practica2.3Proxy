@@ -20,7 +20,7 @@ En esta práctica configuraremos un **servidor proxy inverso** con Nginx para re
     - Cambiar el nombre del archivo de configuración de Nginx a `webserver`.
 
     ```bash
-    sudo mv /etc/nginx/sites-available/old_name /etc/nginx/sites-available/webserver
+    sudo mv /etc/nginx/sites-available/Practica2Daw /etc/nginx/sites-available/webserver
     ```
 
     - Dentro del archivo, actualizar las referencias al nombre del sitio web.
@@ -44,7 +44,7 @@ En esta práctica configuraremos un **servidor proxy inverso** con Nginx para re
 3. **Eliminar el enlace simbólico anterior y crear uno nuevo**:
 
     ```bash
-    sudo unlink /etc/nginx/sites-enabled/old_name
+    sudo unlink /etc/nginx/sites-enabled/Practica2Daw
     sudo ln -s /etc/nginx/sites-available/webserver /etc/nginx/sites-enabled/
     ```
 
@@ -57,11 +57,13 @@ En esta práctica configuraremos un **servidor proxy inverso** con Nginx para re
 ## Servidor Proxy Inverso (Proxy)
 
 1. **Crear un archivo de configuración para el proxy inverso**:
-    - Crear un nuevo archivo de configuración en `/etc/nginx/sites-available/` llamado `proxy`.
+    - Crear un nuevo archivo de configuración en `/etc/nginx/sites-available/` llamado `Practica2Daw`.
 
     ```bash
-    sudo nano /etc/nginx/sites-available/proxy
+    sudo nano /etc/nginx/sites-available/Practica2Daw
     ```
+
+    ![comando1_edicionPractica2Daw](assets/images/Captura%20de%20pantalla%202024-10-18%20185509.png)
 
 2. **Configuración del proxy inverso**:
     - Dentro del archivo, configurar el proxy para redirigir las solicitudes al servidor web (`webserver:8080`).
@@ -69,18 +71,22 @@ En esta práctica configuraremos un **servidor proxy inverso** con Nginx para re
     ```nginx
     server {
         listen 80;
-        server_name proxy;
+        server_name Practica2Daw;
         location / {
             proxy_pass http://webserver:8080;
         }
     }
     ```
 
+    ![comando2_editor_proxy](assets/images/Captura%20de%20pantalla%202024-10-24%20222205.png)
+
 3. **Crear un enlace simbólico para activar el proxy**:
 
     ```bash
-    sudo ln -s /etc/nginx/sites-available/proxy /etc/nginx/sites-enabled/
+    sudo ln -s /etc/nginx/sites-available/Practica2Daw /etc/nginx/sites-enabled/
     ```
+
+    ![comando3_vincular](assets/images/Captura%20de%20pantalla%202024-10-18%20190422.png)
 
 4. **Reiniciar Nginx en el servidor proxy**:
 
@@ -122,10 +128,10 @@ En esta práctica configuraremos un **servidor proxy inverso** con Nginx para re
     ```nginx
     server {
         listen 80;
-        server_name proxy;
+        server_name Practica2Daw;
         location / {
             proxy_pass http://webserver:8080;
-            add_header Host Proxy_inverso_tunombre;
+            add_header Host Practica2Daw;
         }
     }
     ```
